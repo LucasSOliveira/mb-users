@@ -1,0 +1,29 @@
+@use "../variables/colors.variables" as *;
+@use "../variables/typography.variables" as *;
+@use "../variables/ui.variables" as *;
+
+html,
+body {
+  font-family: $font-family-01;
+  font-size: $font-size-default;
+  color: $color-text-primary;
+}
+
+h1 {
+  font-size: $font-size-h1;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+}
+
+h2 {
+  font-size: $font-size-h2;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+}
+
+p {
+  font-family: $font-family-01;
+  font-size: $font-size-paragraph;
+  line-height: 1.4;
+  color: $color-text-secondary;
+}
