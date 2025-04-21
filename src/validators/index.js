@@ -4,8 +4,8 @@ export function isValidEmail(email) {
 }
 
 export function isValidCPF(cpf) {
-  cpf = cpf.replace(/\D/g, ""); // Remove caracteres não numéricos
-  if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false; // Verifica tamanho e repetição de dígitos
+  cpf = cpf.replace(/\D/g, "");
+  if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
 
   let sum = 0;
   for (let i = 0; i < 9; i++) {
@@ -25,8 +25,8 @@ export function isValidCPF(cpf) {
 }
 
 export function isValidCNPJ(cnpj) {
-  cnpj = cnpj.replace(/\D/g, ""); // Remove caracteres não numéricos
-  if (cnpj.length !== 14 || /^(\d)\1+$/.test(cnpj)) return false; // Verifica tamanho e repetição de dígitos
+  cnpj = cnpj.replace(/\D/g, "");
+  if (cnpj.length !== 14 || /^(\d)\1+$/.test(cnpj)) return false;
 
   const validateDigit = (cnpj, length) => {
     let sum = 0;
@@ -43,7 +43,9 @@ export function isValidCNPJ(cnpj) {
 }
 
 export function isValidPhone(phone) {
-  return phone.length >= 10 && phone.length <= 11 && /^\d+$/.test(phone);
+  const cleanedPhone = phone.replace(/\D/g, "");
+
+  return cleanedPhone.length >= 10 && cleanedPhone.length <= 11;
 }
 
 export function isValidDate(date) {
@@ -51,16 +53,22 @@ export function isValidDate(date) {
 }
 
 export function isValidBirthDate(date) {
-  const parsedDate = new Date(date);
-  const today = new Date();
-  const hundredYearsAgo = new Date();
-  hundredYearsAgo.setFullYear(today.getFullYear() - 100);
+  const [day, month, year] = date.split('/').map(Number);
 
-  if (isNaN(parsedDate.getTime())) {
+  const parsedDate = new Date(year, month - 1, day);
+  if (
+    !day || !month || !year || 
+    parsedDate.getDate() !== day || 
+    parsedDate.getMonth() !== month - 1 || 
+    parsedDate.getFullYear() !== year
+  ) {
     return false;
   }
 
-  return parsedDate <= today && parsedDate >= hundredYearsAgo;
+  const today = new Date();
+  const maxAgeDate = new Date(today.getFullYear() - 120, today.getMonth(), today.getDate());
+
+  return parsedDate <= today && parsedDate >= maxAgeDate;
 }
 
 export function isWeakPassword(password) {

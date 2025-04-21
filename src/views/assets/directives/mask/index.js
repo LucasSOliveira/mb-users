@@ -1,4 +1,4 @@
-// vmask-directive.ts
+// vmask-directive.js
 
 const tokenDefinitions = {
   "#": { test: (char) => /[0-9]/.test(char) }, // aceita dígitos
@@ -66,47 +66,37 @@ function applyMask(value, tokensOrList) {
     ? selectBestMask(value, tokensOrList)
     : tokensOrList;
 
-  let result = '';
+  let result = "";
   let valueIndex = 0;
 
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
 
-    if (token.type === 'literal') {
-      result += token.value;
-      if (value[valueIndex] === token.value) {
-        valueIndex++;
+    if (token.type === "literal") {
+      const restDigits = value.slice(valueIndex).replace(/\D/g, "").length;
+      if (restDigits > 0) {
+        result += token.value;
       }
-    } else if (token.type === 'mask') {
-      if (valueIndex >= value.length) {
-        if (token.optional) continue;
-        else break;
-      }
+      continue;
+    }
 
-      let currentChar = value[valueIndex];
+    if (valueIndex >= value.length) break;
 
-      if (tokenDefinitions[token.char].test(currentChar)) {
-        result += currentChar;
-        valueIndex++;
-      } else {
-        if (!token.optional) {
-          while (
-            valueIndex < value.length &&
-            !tokenDefinitions[token.char].test(value[valueIndex])
-          ) {
-            valueIndex++;
-          }
-          if (valueIndex < value.length) {
-            result += value[valueIndex];
-            valueIndex++;
-          }
-        }
-      }
+    const currentChar = value[valueIndex];
+
+    if (tokenDefinitions[token.char].test(currentChar)) {
+      result += currentChar;
+      valueIndex++;
+    } else {
+
+      valueIndex++;
+      i--;
     }
   }
 
   return result;
 }
+
 const vMask = {
   mounted(el, binding) {
     const maskInput = binding.value;

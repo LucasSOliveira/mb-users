@@ -106,13 +106,25 @@ export const registrationSchema = {
     if (!value) {
       return { valid: false, message: 'Senha é obrigatória.' };
     }
-
-    const valid = validators.passwordValidator(value);
+  
+    const errors = validators.isWeakPassword(value);
+    if (errors.length === 0) {
+      return { valid: true, message: '' };
+    }
+  
+    const messages = {
+      required:    'Senha é obrigatória.',
+      minLength:   'Senha deve conter ao menos 8 caracteres.',
+      lowercase:   'Senha deve conter letra minúscula.',
+      uppercase:   'Senha deve conter letra maiúscula.',
+      number:      'Senha deve conter número.',
+      specialChar: 'Senha deve conter caractere especial.',
+    };
+  
     return {
-      valid,
-      message: valid
-        ? ''
-        : 'Senha deve conter pelo menos 8 caracteres, incluindo letras e números.',
+      valid: errors.length === 0,
+      message: messages[errors[0]] || '',
+      errors,
     };
   },
 };
