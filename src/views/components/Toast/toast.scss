@@ -1,0 +1,51 @@
+@use '@/assets/styles/variables/_colors.variables.scss' as *;
+@use '@/assets/styles/variables/_typography.variables.scss' as *;
+@use '@/assets/styles/variables/_ui.variables.scss' as *;
+
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.toast {
+  font-family: $font-family-01;
+  padding: 12px 16px;
+  border-radius: $border-radius-middle;
+  font-weight: $font-weight-bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 1;
+  transition: opacity 2s ease, transform 2s ease;
+  transform: translateY(0);
+
+  &__text {
+    font-size: $font-size-default;
+    line-height: 1;
+  }
+
+  &--success {
+    background-color: $color-ui-success;
+    color: $color-ui-white;
+  }
+
+  &--error {
+    background-color: $color-ui-danger;
+    color: $color-ui-white;
+  }
+
+  &--warning {
+    background-color: $color-ui-warning;
+    color: $color-ui-white;
+  }
+
+  &.fade-out {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
