@@ -1,0 +1,28 @@
+{
+  "name": "mb-users",
+  "version": "1.0.0",
+  "description": "Somos a maior plataforma de negociação de criptomoedas e ativos alternativos da América Latina, criada para elevar a experiência de quem vivencia essa revolução, entregando o melhor serviço de negociação de ativos alternativos, com liberdade, segurança e liquidez. Sendo assim, nós existimos para mudar a maneira como as pessoas lidam com o dinheiro através da tecnologia.",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/main.js",
+    "build": "vite build",
+    "start": "node src/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.3",
+    "eslint": "^9.25.0",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.5.3",
+    "sass": "^1.86.3",
+    "vite": "^6.3.2"
+  }
+}
