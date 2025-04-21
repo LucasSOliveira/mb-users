@@ -4,12 +4,29 @@
       <h1 class="registration-page__title">
         <span>MB</span> Cadastro
       </h1>
-      <p class="registration-page__indicator"> Etapa <strong>{{ state.step }}</strong> de 4</p>
+      <p class="registration-page__indicator">
+        Etapa <strong>{{ state.step }}</strong> de 4
+      </p>
       <h2 class="registration-page__step-title">{{ stepTitle }}</h2>
     </section>
-    <keep-alive>
+    <keep-alive class="container">
       <component :is="currentStepComponent" />
     </keep-alive>
+    <section class="registration-page__button-group container">
+      <Button
+        v-if="state.step !== 1"
+        id="registration-button-back"
+        @click="setStep(state.step - 1)"
+        secondary>
+        Voltar
+      </Button>
+      <Button
+        id="registration-button-submit"
+        @click="setStep(state.step + 1)"
+        :disabled="!validateForStep">
+        {{ stepButtonTitle }}
+      </Button>
+    </section>
   </main>
 </template>
 
@@ -19,21 +36,21 @@ import { useRegistrationStore } from '../store/registration-store';
 import StepOne from '@modules/registration/components/StepOne.vue';
 import StepTwo from '@modules/registration/components/StepTwo.vue';
 import StepThree from '@modules/registration/components/StepThree.vue';
+import StepFour from '@modules/registration/components/StepFour.vue';
 
-const { state } = useRegistrationStore();
+import Button from '@components/Button/Button.vue';
 
-// mapeia o número do step para o componente
+const { state, validateForStep, setStep } = useRegistrationStore();
+
 const steps = {
   1: StepOne,
   2: StepTwo,
   3: StepThree,
+  4: StepFour,
 };
 
 const currentStepComponent = computed(() => steps[state.step]);
-const stepIndicator = computed(() => {
-  return `Etapa ${state.step} de 4`;
-});
-const stepTitle = computed (() => {
+const stepTitle = computed(() => {
   switch (state.step) {
     case 1:
       return 'Seja bem-vindo(a)';
@@ -49,26 +66,46 @@ const stepTitle = computed (() => {
       return 'Insira suas informações';
   }
 });
+const stepButtonTitle = computed(() => {
+  return state.step === 4 ? 'Cadastrar' : 'Continuar';
+});
 
 </script>
 
 <style lang="scss" scoped>
 .registration-page {
   padding: 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
   &__title {
     margin-bottom: 32px;
     color: $color-text-primary;
+
     span {
       font-weight: bold;
       color: $color-brand-primary;
     }
   }
+
   &__step-title {
     margin-bottom: 32px;
   }
+
+  &__button-group {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    @media only screen and (max-width: 768px) {
+      flex-wrap: wrap;
+    }
+  }
+
   &__indicator {
     margin-bottom: 8px;
     color: $color-text-primary;
+
     strong {
       color: $color-brand-primary;
     }

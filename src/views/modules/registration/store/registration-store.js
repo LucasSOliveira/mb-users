@@ -1,5 +1,6 @@
 import { reactive, computed } from 'vue';
 import { registrationSchema as schema } from '../../../../schemas/registration.schema';
+import { isWeakPassword } from '@/validators';
 
 const state = reactive({
   step: 1,
@@ -119,12 +120,81 @@ const validateStepTwo = computed(() => {
   return Object.values(errors).every((field) => field.valid);
 });
 
+const validateStepThree = computed(() => {
+  const passwordValidation = schema.password(state.formData.password);
+
+  return passwordValidation.valid;
+});
+
+const stepThreeErros = computed(() => {
+  const passwordValidation = schema.password(state.formData.password);
+  return {
+    password: {
+      valid: passwordValidation.valid,
+      message: passwordValidation.message,
+    },
+  };
+});
+
+const passwordRequirements = computed(() => {
+  const passwordUnmet = isWeakPassword(state.formData.password || '');
+
+  return [
+  {
+    key: 'minLength',
+    label: 'Mínimo de 8 caracteres',
+    met: !passwordUnmet.includes('minLength')
+  },
+  {
+    key: 'lowercase',
+    label: 'Uma letra minúscula',
+    met: !passwordUnmet.includes('lowercase')
+  },
+  {
+    key: 'uppercase',
+    label: 'Uma letra maiúscula',
+    met: !passwordUnmet.includes('uppercase')
+  },
+  {
+    key: 'number',
+    label: 'Um número',
+    met: !passwordUnmet.includes('number') },
+  {
+    key: 'specialChar', label: 'Um caractere especial',
+    met: !passwordUnmet.includes('specialChar')
+  }
+]});
+
+const validateStepFour = computed(() => {
+  return validateStepOne.value && validateStepTwo.value && validateStepThree.value;
+})
+
+const validateForStep = computed(() => {
+  switch (state.step) {
+    case 1:
+      return validateStepOne.value;
+    case 2:
+      return validateStepTwo.value;
+    case 3:
+      return validateStepThree.value;
+    case 4:
+      return validateStepFour.value;
+    default:
+      return false;
+  }
+});
+
 export const useRegistrationStore = () => ({
   state,
   validateStepOne,
   stepOneErrors,
   validateStepTwo,
   stepTwoErrors,
+  stepThreeErros,
+  validateStepThree,
+  passwordRequirements,
+  validateForStep,
+  validateStepFour,
   setStep,
   clearForm,
 });
