@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@views/*": ["src/views/*"],
+      "@utils/*": ["src/utils/*"],
+      "@validators/*": ["src/validators/*"],
+      "@modules/*": ["src/views/modules/*"],
+      "@components/*": ["src/views/components/*"],
+      "@assets/*": ["src/views/assets/*"],
+      "@registration/*": ["src/registration/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+} 
