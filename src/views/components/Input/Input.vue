@@ -178,6 +178,9 @@ function clickIcon() {
       border-color: $color-ui-danger;
       color: $color-ui-danger;
     }
+    &::placeholder {
+      color: $color-ui-light-gray;
+    }
   }
 
   &__icon {

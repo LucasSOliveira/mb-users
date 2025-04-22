@@ -3,9 +3,8 @@
         <Input
             id="registration-field-email"
             label="E-mail"
-            type="email"
             mask="E.repeat(50)"
-            placeholder="lucas@mail.com"
+            placeholder="Informe seu e-mail"
             v-model="state.formData.email"
             :errorMessage="stepOneErrors.email.message"
             :hasValidated="stepOneErrors.email.valid"
