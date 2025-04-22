@@ -3,7 +3,6 @@ import express from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createServer as createViteServer } from 'vite';
-
 import registrationModule from './registration/registration.module.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -29,18 +28,22 @@ async function bootstrap() {
 
   if (isProd) {
     const distDir = path.resolve(__dirname, '../dist');
-    app.use( express.static(distDir));
+
+    app.use(express.static(distDir));
   }
 
-  app.use((req, res, next) => {
+  app.use((req, res) => {
     if (req.path.startsWith('/api')) {
-      return next();
+      return res.status(404).json({
+        message: 'API não encontrada'
+      });
     }
+
     res.status(404).send('Página não encontrada');
   });
 
   app.listen(PORT, () =>
-    console.log(`🚀  http://localhost:${PORT}  (${isProd ? 'prod' : 'dev'})`)
+    console.log(`🚀  http://localhost:${PORT}/registration  (${isProd ? 'prod' : 'dev'})`)
   );
 }
 

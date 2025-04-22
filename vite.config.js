@@ -24,7 +24,7 @@ export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, 'dist'),
     emptyOutDir: true,
-    manifest: true, // Gera o arquivo manifest.json
+    manifest: true,
     rollupOptions: {
       output: {
         assetFileNames: 'assets/[name].[hash][extname]',
