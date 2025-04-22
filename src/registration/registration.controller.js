@@ -53,10 +53,11 @@ export async function create(req, res, next) {
     }
 
     const id = await save(req.body);
+    const message = "Cadastro criado com sucesso!";
+    
     if (!id) {
       throw new Error("Erro ao salvar o registro.");
     }
-    const message = "Cadastro criado com sucesso!";
 
     return res.status(201).json({
       id,

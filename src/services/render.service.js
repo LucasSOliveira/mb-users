@@ -12,6 +12,7 @@ async function renderDev(req, scriptSrc) {
     path.join(ROOT_VIEWS, "index.html"),
     "utf8"
   );
+
   template = template.replace(
     "<!-- INJECT:SCRIPT -->",
     `<script type="module" src="${scriptSrc}"></script>`
