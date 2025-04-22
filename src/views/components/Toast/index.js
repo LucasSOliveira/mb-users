@@ -32,7 +32,6 @@ export default function createToast(params = {}) {
 
   toastContainer.appendChild(tempDiv);
 
-  // Importa o CSS dinamicamente
   import("./toast.scss").then(() => {
     setTimeout(() => {
       const toastElementOut = document.getElementById(`toast-el-${toastIndex}`);

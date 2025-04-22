@@ -25,7 +25,7 @@ function selectBestMask(value, tokenList) {
 }
 
 function parseMask(mask) {
-  const availableTokens = Object.keys(tokenDefinitions).join(""); // por exemplo: "#ANXM"
+  const availableTokens = Object.keys(tokenDefinitions).join("");
   const repeatRegex = new RegExp(
     `^([${availableTokens}])\\.repeat\\((\\d+)\\)$`
   );
