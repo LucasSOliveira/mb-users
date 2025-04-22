@@ -48,12 +48,25 @@ export function isValidPhone(phone) {
   return cleanedPhone.length >= 10 && cleanedPhone.length <= 11;
 }
 
-export function isValidDate(date) {
-  return !isNaN(Date.parse(date));
-}
+export function isValidOpeningDate(date) {
+  const [day, month, year] = date.split('/')?.map(Number);
 
+  const parsedDate = new Date(year, month - 1, day);
+  const today = new Date();
+
+  if (
+    !day || !month || !year || 
+    parsedDate.getDate() !== day || 
+    parsedDate.getMonth() !== month - 1 || 
+    parsedDate.getFullYear() !== year
+  ) {
+    return false;
+  }
+
+  return parsedDate <= today;
+}
 export function isValidBirthDate(date) {
-  const [day, month, year] = date.split('/').map(Number);
+  const [day, month, year] = date.split('/')?.map(Number);
 
   const parsedDate = new Date(year, month - 1, day);
   if (
@@ -81,5 +94,5 @@ export function isWeakPassword(password) {
     specialChar: (v) => /[!@#$%^&*(),.?":{}|<>]/.test(v),
   })
     .filter(([, test]) => !test(password))
-    .map(([key]) => key);
+    ?.map(([key]) => key);
 }

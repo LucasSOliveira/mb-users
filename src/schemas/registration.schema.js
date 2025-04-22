@@ -1,4 +1,4 @@
-import * as validators from '../validators';
+import * as validators from '../validators/index.js';
 
 export const registrationSchema = {
   email: (value) => {
@@ -25,15 +25,12 @@ export const registrationSchema = {
         message: 'Tipo de cadastro é obrigatório.',
       };
     }
-    if (!typesEnum.includes(value)) {
-      return {
-        valid: false,
-        message: 'Tipo de cadastro inválido. Tipos aceitos: PJ ou PF.',
-      };
-    }
+
     return {
-      valid: true,
-      message: '',
+      valid: typesEnum.includes(value),
+      message: !typesEnum.includes(value) 
+        ? 'Tipo de cadastro inválido. Tipos aceitos: PJ ou PF.'
+        : '' 
     };
   },
 
@@ -97,7 +94,7 @@ export const registrationSchema = {
       return { valid: false, message: 'Data de abertura é obrigatória.' };
     }
     return {
-      valid: validators.isValidBirthDate(value),
+      valid: validators.isValidOpeningDate(value),
       message: 'Data de abertura inválida.',
     };
   },

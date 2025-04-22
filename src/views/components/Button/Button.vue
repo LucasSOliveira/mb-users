@@ -1,10 +1,22 @@
 <template>
-    <button class="button" :class="{
-        'button--primary': props.primary,
-        'button--secondary': props.secondary,
-        'button--disabled': props.disabled
-    }" :disabled="disabled" @click="handleClick">
-        <slot />
+    <button
+        :id="id"
+        :class="{
+            'button': true,
+            'button--primary': props.primary,
+            'button--secondary': props.secondary,
+            'button--disabled': props.disabled,
+            'button--loading': props.loading,
+        }"
+        :disabled="props.disabled || props.loading"
+        :type="type"
+        @click="handleClick">
+        <span
+            v-if="loading"
+            class="material-symbols-outlined animate-spin">
+                progress_activity
+        </span>
+        <slot v-else />
     </button>
 </template>
 
@@ -16,6 +28,14 @@ const props = defineProps({
         type: Boolean,
         default: true,
     },
+    id: {
+        type: String,
+        default: null,
+    },
+    type: {
+        type: String,
+        default: 'button',
+    },
     secondary: {
         type: Boolean,
         default: false,
@@ -24,6 +44,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    loading: {
+        type: Boolean,
+        default: false,
+    }
 });
 
 const emit = defineEmits(['click']);
@@ -62,8 +86,28 @@ function handleClick(event) {
         cursor: not-allowed;
     }
 
+    &--loading {
+        filter: opacity(0.5);
+        cursor: not-allowed;
+    }
+
     &:hover:not(.button--disabled) {
         filter: brightness(0.9);
+    }
+
+    .animate-spin {
+        display: inline-block;
+        animation: spin 1s linear infinite;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
     }
 }
 </style>

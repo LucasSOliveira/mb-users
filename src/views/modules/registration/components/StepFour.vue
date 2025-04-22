@@ -27,7 +27,8 @@
 </template>
 
 <script setup>
-import { useRegistrationStore } from '../store/registration-store';
+import { computed, ref } from 'vue';
+import { useRegistration } from '../store/registration-composable';
 import Input from '@components/Input/Input.vue';
 import StepTwo from '@modules/registration/components/StepTwo.vue';
 
@@ -35,7 +36,19 @@ const {
     state,
     stepOneErrors,
     stepThreeErros
-} = useRegistrationStore();
+} = useRegistration();
+
+const showPassword = ref(false);
+
+const passwordIcon = computed(() => {
+  return showPassword.value ? "password" : "password_2";
+});
+const handlerPasswordFieldType = () => {
+  showPassword.value = !showPassword.value;
+};
+const passwordType = computed(() => {
+  return showPassword.value ? "text" : "password";
+});
 
 </script>
 

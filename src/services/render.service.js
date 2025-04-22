@@ -31,7 +31,7 @@ async function renderProd(scriptSrc) {
   const pathsToCSS = manifestPaths?.css || [];
 
   if (pathsToCSS.length) {
-    const csslinks = pathsToCSS.map((css) => {
+    const csslinks = pathsToCSS?.map((css) => {
       return `<link rel="stylesheet" href="/${css}">`;
     });
 

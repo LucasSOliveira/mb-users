@@ -51,7 +51,7 @@ mb-users/
 │   │   ├── services/                           # Serviços específicos do módulo
 │   │   │   └── registration-service.js         # Serviço para lógica de registro
 │   │   └── store/                              # Store do Vue 3 para estado e lógica
-│   │       └── registration-store.js           # Gerenciamento de estado do registro
+│   │       └── registration-composable.js           # Gerenciamento de estado do registro
 │   └── main.js                                 # Arquivo de inicialização da aplicação
 ├── package.json                                # Dependências e scripts globais do projeto
 ├── vite.config.js                              # Configuração do Vite para build e middleware

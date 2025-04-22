@@ -71,13 +71,13 @@
 </template>
 
 <script setup>
-import { useRegistrationStore } from '../store/registration-store';
+import { useRegistration } from '../store/registration-composable';
 import Input from '@components/Input/Input.vue';
 
 const {
     state,
     stepTwoErrors,
-} = useRegistrationStore();
+} = useRegistration();
 
 </script>
 

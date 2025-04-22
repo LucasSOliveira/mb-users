@@ -24,3 +24,8 @@ export async function save(payload) {
   await writeFile(DB_FILE, JSON.stringify(records, null, 2), 'utf8');
   return id;
 }
+
+export async function findByCpfOrCnpj(identifier) {
+  const records = await getRecords();
+  return records.find(record => record.cpf === identifier || record.cnpj === identifier);
+}

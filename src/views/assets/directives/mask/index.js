@@ -101,7 +101,7 @@ const vMask = {
   mounted(el, binding) {
     const maskInput = binding.value;
     const maskList = Array.isArray(maskInput) ? maskInput : [maskInput];
-    const parsedMasks = maskList.map(parseMask);
+    const parsedMasks = maskList?.map(parseMask);
 
     const onInput = (e) => {
       const input = e.target;

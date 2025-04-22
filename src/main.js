@@ -4,7 +4,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createServer as createViteServer } from 'vite';
 
-// Usar importação normal depois que os aliases são registrados
 import registrationModule from './registration/registration.module.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -17,7 +16,7 @@ async function bootstrap() {
   const app = express();
 
   app.use(express.json());
-  app.use('/registration', registrationModule);
+  app.use(registrationModule);
 
   if (isDev) {
     const vite = await createViteServer({
@@ -33,7 +32,12 @@ async function bootstrap() {
     app.use( express.static(distDir));
   }
 
-  app.use((_, res) => res.status(404).send('Página não encontrada'));
+  app.use((req, res, next) => {
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
+    res.status(404).send('Página não encontrada');
+  });
 
   app.listen(PORT, () =>
     console.log(`🚀  http://localhost:${PORT}  (${isProd ? 'prod' : 'dev'})`)

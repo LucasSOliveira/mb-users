@@ -34,14 +34,14 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { useRegistrationStore } from '../store/registration-store';
+import { useRegistration } from '../store/registration-composable';
 import Input from '@components/Input/Input.vue';
 
 const {
     state,
     stepThreeErros,
     passwordRequirements
-} = useRegistrationStore();
+} = useRegistration();
 
 const showPassword = ref(false);
 

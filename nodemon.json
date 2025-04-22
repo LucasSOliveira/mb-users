@@ -1,6 +1,6 @@
 {
   "watch": ["src"],
   "ext": "js,mjs,cjs,json",
-  "ignore": ["src/views/**/*", "node_modules/*", "*.test.js"],
+  "ignore": ["src/views/**/*", "node_modules/*", "*.test.js", "src/database/**/*"],
   "delay": "500"
 } 

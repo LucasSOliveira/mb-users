@@ -24,14 +24,14 @@
 </template>
 
 <script setup>
-import { useRegistrationStore } from '../store/registration-store';
+import { useRegistration } from '../store/registration-composable';
 import Input from '@components/Input/Input.vue';
 import RadioButton from '@components/Radio/RadioButton.vue';
 
 const {
     state,
     stepOneErrors,
-} = useRegistrationStore();
+} = useRegistration();
 
 const options = [
     { label: 'Pessoa Física', value: 'PF' },
