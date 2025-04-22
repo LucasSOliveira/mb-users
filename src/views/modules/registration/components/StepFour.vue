@@ -12,15 +12,15 @@
         <StepTwo/>
         <Input
             id="registration-field-password"
+            v-model="state.formData.password"
             label="Senha"
             :type="passwordType"
             mask="E.repeat(50)"
             placeholder="**********"
             :icon="passwordIcon"
-            @clickIcon="handlerPasswordFieldType"
-            v-model="state.formData.password"
             :errorMessage="stepThreeErros.password.message"
             :hasValidated="stepThreeErros.password.valid"
+            @clickIcon="handlerPasswordFieldType"
         />
     </div>
 </template>

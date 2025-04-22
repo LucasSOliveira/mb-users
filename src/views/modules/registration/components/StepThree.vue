@@ -7,10 +7,10 @@
             mask="E.repeat(50)"
             placeholder="**********"
             :icon="passwordIcon"
-            @clickIcon="handlerPasswordFieldType"
             v-model="state.formData.password"
             :errorMessage="stepThreeErros.password.message"
             :hasValidated="stepThreeErros.password.valid"
+            @clickIcon="handlerPasswordFieldType"
         />
         <span class="stap-three__password-requires-label">A senha deve conter:</span>
         <ul>

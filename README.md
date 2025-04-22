@@ -21,7 +21,7 @@
 
 ### Pré-requisitos
 
-- Node.js (versão 16 ou superior)
+- Node.js (versão 18 ou superior)
 - npm (gerenciador de pacotes)
 
 ### Passos

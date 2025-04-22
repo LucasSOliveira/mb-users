@@ -65,16 +65,16 @@ const steps = {
 
 const currentStepComponent = computed(() => steps[state.step]);
 const stepTitle = computed(() => {
-  switch (state.step) {
-    case 1:
+  switch (true) {
+    case state.step === 1:
       return 'Seja bem-vindo(a)';
-    case 2 && state.formData.type === 'PF':
+    case state.step === 2 && state.formData.type === 'PF':
       return 'Pessoa Física';
-    case 2 && state.formData.type === 'PJ':
+    case state.step === 2 && state.formData.type === 'PJ':
       return 'Pessoa Jurídica';
-    case 3:
+    case state.step === 3:
       return 'Senha de acesso';
-    case 4:
+    case state.step === 4:
       return 'Revise suas informações';
     default:
       return 'Insira suas informações';

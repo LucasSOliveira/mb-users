@@ -62,8 +62,8 @@
             id="registration-field-phone"
             label="Telefone"
             v-model="state.formData.phone"
-            :mask="['(##) #####-####', '(##) ####-####']"
             placeholder="(11) 91234-5678"
+            :mask="['(##) #####-####', '(##) ####-####']"
             :errorMessage="stepTwoErrors.phone.message"
             :hasValidated="stepTwoErrors.phone.valid"
         />

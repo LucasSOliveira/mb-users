@@ -12,8 +12,8 @@
         <div class="stap-one__radio-group">
             <RadioButton
                 v-for="option in options"
-                :key="option.value"
                 v-model="state.formData.type"
+                :key="option.value"
                 :value="option.value"
                 :name="'registrationType'">
                 {{ option.label }}
