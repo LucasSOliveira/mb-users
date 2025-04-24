@@ -4,7 +4,7 @@
             <Input
                 id="registration-field-nome"
                 label="Nome"
-                mask="M.repeat(60)"
+                mask="X.repeat(60)"
                 placeholder="Informe o nome completo"
                 v-model="state.formData.name"
                 :errorMessage="stepTwoErrors.name.message"
